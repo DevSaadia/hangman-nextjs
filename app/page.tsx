@@ -31,7 +31,10 @@ export default function Home() {
 
     if (guessedArray.includes(inputValue)) {
       alert("You have already guessed this letter");
+      setinputValue('');
+      return;
     }
+
 
     setGuessedArray([...guessedArray, inputValue]);
 
