@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Home() {
@@ -21,11 +21,16 @@ export default function Home() {
       setwinStatus(true);
       setgameOver(true);
     }
+
   }, [chosenwordArray]);
 
 
 
   function checkGuess(inputValue: string) {
+
+    if (guessedArray.includes(inputValue)) {
+      alert("You have already guessed this letter");
+    }
 
     setGuessedArray([...guessedArray, inputValue]);
 
@@ -59,6 +64,15 @@ export default function Home() {
     setMisses(0);
     setGuessedArray([]);
   }
+
+  // function validateInput(e: React.ChangeEvent<HTMLInputElement>) {
+  //   const value = e.target.value;
+  //   const allowedCharacters = /^[a-zA-Z]*$/; // Regular expression to allow only letters
+
+  //   if (value === '' || allowedCharacters.test(value)) {
+  //     setinputValue(value);
+  //   }
+  // }
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
