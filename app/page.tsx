@@ -6,7 +6,7 @@ export default function Home() {
   const chosenWord = 'HAWAII';
   const [inputValue, setinputValue] = useState('');
   const [guessedArray, setGuessedArray] = useState<string[]>([]);
-  const maxMisses = 7;
+  const maxMisses = 6;
   const [misses, setMisses] = useState(0)
   // const [imageSource, setimageSource] = useState(`/images/hangman${misses}.png`)
   const [winStatus, setwinStatus] = useState(false);
@@ -21,6 +21,7 @@ export default function Home() {
       setwinStatus(true);
       setgameOver(true);
     }
+    // if ()
 
   }, [chosenwordArray]);
 
