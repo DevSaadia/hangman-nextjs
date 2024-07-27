@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import QWERTY from "./components/QWERTY";
+import LetterHolder from "./components/LetterHolder";
 
 export default function Home() {
   const chosenWord = 'HAWAII';
@@ -12,12 +13,13 @@ export default function Home() {
   // const [imageSource, setimageSource] = useState(`/images/hangman${misses}.png`)
   const [winStatus, setwinStatus] = useState(false);
   const [gameOver, setgameOver] = useState(false);
+  const [loseStatus, setloseStatus] = useState(false);
 
-  const [chosenwordArray, setChosenwordArray] = useState<string[]>(new Array(chosenWord.length).fill('_'));
+  const [chosenwordArray, setChosenwordArray] = useState<string[]>(new Array(chosenWord.length).fill(''));
 
   //this is to make sure whenever the array has all the correct letters, win is shown immediately
   useEffect(() => {
-    if (!chosenwordArray.includes('_')) {
+    if (!chosenwordArray.includes('')) {
       console.log("win");
       setwinStatus(true);
       setgameOver(true);
@@ -58,12 +60,13 @@ export default function Home() {
       console.log("maxmisses" + maxMisses);
       console.log("boolean" + (misses >= maxMisses));
       setgameOver(misses >= maxMisses);
+      setloseStatus(misses >= maxMisses);
     }
     setinputValue('');
   }
 
   function resetGame() {
-    setChosenwordArray(new Array(chosenWord.length).fill('_'));
+    setChosenwordArray(new Array(chosenWord.length).fill(''));
     setwinStatus(false);
     setgameOver(false);
     setMisses(0);
@@ -81,6 +84,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-24">
+
       <h1 className="text-lg mb-4">Welcome to Hangman!</h1>
       <div className="w-76 h-96  ">
         <Image className=" object-cover w-full h-full rounded-lg" src={`/images/${misses}.jpg`} width={400} height={400} alt={""} />
@@ -88,9 +92,17 @@ export default function Home() {
       {/* <p>Number of missses: {misses}</p> */}
       {gameOver && <h3>Game over!</h3>}
       {gameOver && winStatus && <h3>You win!</h3>}
+      {loseStatus && <h3>The word was {chosenWord}.</h3>}
 
-      <div className="flex flex-row text-lg my-3 gap-2">
-        {chosenwordArray.map((letter, index) => (<p key={index}>{letter}&nbsp;</p>))}</div>
+
+
+      <div className="flex flex-row text-lg my-3 gap-1">
+        {chosenwordArray.map((letter, index) => (
+          <LetterHolder key={index} letter={letter} />
+
+        ))
+        }
+      </div>
 
       <QWERTY guess={inputValue} onGuessChange={checkGuess} />
       {/* <div id="guessed-container" className="border border-black p-4">

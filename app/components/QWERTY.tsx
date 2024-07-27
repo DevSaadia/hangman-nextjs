@@ -4,6 +4,8 @@ interface QWERTYProps {
     guess: string;
     onGuessChange: (guess: string) => void;
 }
+//TODO: Add a prop to disable the keyboard when misses are maxed out
+//TODO: Add a prop so keys only appear red if their value is part of the gueessed letters
 
 const QWERTY: React.FC<QWERTYProps> = ({ guess, onGuessChange }) => {
     const letters = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
@@ -26,7 +28,7 @@ const QWERTY: React.FC<QWERTYProps> = ({ guess, onGuessChange }) => {
                                 handleClick(letter);
                                 handleButtonPress(e);
                             }}
-                            className=' rounded-md bg-slate-200 text-gray-500 text-xs p-3 disabled:bg-red-400'
+                            className=' rounded-md bg-cyan-600 text-gray-100 text-xs p-3 disabled:bg-cyan-800'
                         >
                             {letter}
                         </button>
