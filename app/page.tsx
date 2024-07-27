@@ -15,6 +15,7 @@ export default function Home() {
   const [winStatus, setwinStatus] = useState(false);
   const [gameOver, setgameOver] = useState(false);
   const [loseStatus, setloseStatus] = useState(false);
+  const [resetting, setresetting] = useState(false);
 
   const [chosenwordArray, setChosenwordArray] = useState<string[]>(new Array(chosenWord.length).fill(''));
 
@@ -22,7 +23,7 @@ export default function Home() {
     const word = words[Math.floor(Math.random() * words.length)];
     setChosenWord(word);
     setChosenwordArray(new Array(word.length).fill(''));
-  }, []);
+  }, [resetting]);
 
   //this is to make sure whenever the array has all the correct letters, win is shown immediately
   useEffect(() => {
@@ -76,6 +77,7 @@ export default function Home() {
   }
 
   function resetGame() {
+    setresetting(true);
     setChosenwordArray(new Array(chosenWord.length).fill(''));
     setwinStatus(false);
     setgameOver(false);
