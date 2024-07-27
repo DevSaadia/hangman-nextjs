@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import QWERTY from "./components/QWERTY";
 
 export default function Home() {
   const chosenWord = 'HAWAII';
@@ -79,17 +80,19 @@ export default function Home() {
   // }
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <h1>Welcome to Hangman!</h1>
-      <div className="w-76 h-96 border border-black">
-        <Image className=" object-contain w-full h-full" src={`/images/${misses}.jpg`} width={400} height={400} alt={""} />
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <h1 className="text-lg mb-4">Welcome to Hangman!</h1>
+      <div className="w-76 h-96  ">
+        <Image className=" object-cover w-full h-full rounded-lg" src={`/images/${misses}.jpg`} width={400} height={400} alt={""} />
       </div>
       {/* <p>Number of missses: {misses}</p> */}
       {gameOver && <h3>Game over!</h3>}
       {gameOver && winStatus && <h3>You win!</h3>}
 
-      <div className="flex flex-row text-lg">
+      <div className="flex flex-row text-lg my-3 gap-2">
         {chosenwordArray.map((letter, index) => (<p key={index}>{letter}&nbsp;</p>))}</div>
+
+      <QWERTY />
       <div id="guessed-container" className="border border-black p-4">
         <h3>Guessed Letters:</h3>
         <div className="flex flex-row gap-2">
