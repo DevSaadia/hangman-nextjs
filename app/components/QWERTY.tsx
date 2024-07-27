@@ -28,10 +28,12 @@ const QWERTY: React.FC<QWERTYProps> = ({ guess, guessedLetters, onGuessChange, m
                             value={letter}
                             disabled={misses > maxMisses}
                             onClick={(e) => {
+                                const target = e.target as HTMLButtonElement;
+                                target.disabled = true;
                                 handleClick(letter);
                                 handleButtonPress(e);
                             }}
-                            className={`rounded-md bg-cyan-600 text-gray-100 text-xs p-3 ${guessedLetters.includes(letter) ? 'bg-cyan-800' : 'bg-cyan-600'}`}
+                            className={`rounded-md bg-cyan-600 text-gray-100 w-8 h-10 text-xs p-3 ${guessedLetters.includes(letter) ? 'bg-cyan-800' : 'bg-cyan-600'}`}
                         >
                             {letter}
                         </button>

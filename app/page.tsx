@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import QWERTY from "./components/QWERTY";
 import LetterHolder from "./components/LetterHolder";
+import { words } from "./data/word";
 
 export default function Home() {
-  const chosenWord = 'HAWAII';
+  const [chosenWord, setChosenWord] = useState('');
   const [inputValue, setinputValue] = useState('');
   const [guessedArray, setGuessedArray] = useState<string[]>([]);
   const maxMisses = 6;
@@ -17,16 +18,22 @@ export default function Home() {
 
   const [chosenwordArray, setChosenwordArray] = useState<string[]>(new Array(chosenWord.length).fill(''));
 
+  useEffect(() => {
+    const word = words[Math.floor(Math.random() * words.length)];
+    setChosenWord(word);
+    setChosenwordArray(new Array(word.length).fill(''));
+  }, []);
+
   //this is to make sure whenever the array has all the correct letters, win is shown immediately
   useEffect(() => {
-    if (!chosenwordArray.includes('')) {
+    if (chosenWord && !chosenwordArray.includes('')) {
       console.log("win");
       setwinStatus(true);
       setgameOver(true);
     }
     // if ()
 
-  }, [chosenwordArray]);
+  }, [chosenwordArray, chosenWord]);
 
 
 
@@ -37,6 +44,9 @@ export default function Home() {
       setinputValue('');
       return;
     }
+    console.log("inputValue " + inputValue);
+    console.log("chosenWord " + chosenWord);
+    console.log("chosenwordArray " + chosenwordArray);
 
 
     setGuessedArray([...guessedArray, inputValue]);
@@ -87,12 +97,9 @@ export default function Home() {
       {gameOver && winStatus && <h3>You win!</h3>}
       {loseStatus && <h3>The word was {chosenWord}.</h3>}
 
-
-
       <div className="flex flex-row text-lg my-3 gap-1">
         {chosenwordArray.map((letter, index) => (
           <LetterHolder key={index} letter={letter} />
-
         ))
         }
       </div>
