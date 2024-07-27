@@ -80,7 +80,7 @@ export default function Home() {
   // }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex min-h-screen flex-col items-center justify-start p-24">
       <h1 className="text-lg mb-4">Welcome to Hangman!</h1>
       <div className="w-76 h-96  ">
         <Image className=" object-cover w-full h-full rounded-lg" src={`/images/${misses}.jpg`} width={400} height={400} alt={""} />
@@ -92,8 +92,8 @@ export default function Home() {
       <div className="flex flex-row text-lg my-3 gap-2">
         {chosenwordArray.map((letter, index) => (<p key={index}>{letter}&nbsp;</p>))}</div>
 
-      <QWERTY />
-      <div id="guessed-container" className="border border-black p-4">
+      <QWERTY guess={inputValue} onGuessChange={checkGuess} />
+      {/* <div id="guessed-container" className="border border-black p-4">
         <h3>Guessed Letters:</h3>
         <div className="flex flex-row gap-2">
           {guessedArray.map((letter, index) => (<p key={index}>{letter}</p>))}</div>
@@ -107,7 +107,7 @@ export default function Home() {
         disabled={gameOver}
       >
         Guess
-      </button>
+      </button> */}
 
       {gameOver &&
         <button

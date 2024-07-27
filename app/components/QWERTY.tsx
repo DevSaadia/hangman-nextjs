@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 
-const QWERTY = () => {
+interface QWERTYProps {
+    guess: string;
+    onGuessChange: (guess: string) => void;
+}
+
+const QWERTY: React.FC<QWERTYProps> = ({ guess, onGuessChange }) => {
     const letters = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
     const [pressedLetters, setpressedLetters] = useState<string[]>([]);
     const handleClick = (letter: string) => {
         setpressedLetters([...pressedLetters, letter]);
     };
-
+    const handleButtonPress = (event: React.ChangeEvent<HTMLInputElement>) => { onGuessChange(event.target.value) }
     return (
         <div className='flex flex-col justify-center items-center gap-1 pb-3'>
             {letters.map((row, index) => (
@@ -15,8 +20,12 @@ const QWERTY = () => {
                         <button
 
                             key={lindex}
+                            value={letter}
                             disabled={pressedLetters.includes(letter)}
-                            onClick={() => handleClick(letter)}
+                            onClick={(e) => {
+                                handleClick(letter);
+                                handleButtonPress(e);
+                            }}
                             className=' rounded-md bg-slate-200 text-gray-500 text-xs p-3 disabled:bg-red-400'
                         >
                             {letter}
