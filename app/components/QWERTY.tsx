@@ -11,7 +11,7 @@ const QWERTY: React.FC<QWERTYProps> = ({ guess, onGuessChange }) => {
     const handleClick = (letter: string) => {
         setpressedLetters([...pressedLetters, letter]);
     };
-    const handleButtonPress = (event: React.ChangeEvent<HTMLInputElement>) => { onGuessChange(event.target.value) }
+    const handleButtonPress = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => { onGuessChange(event.currentTarget.value) }
     return (
         <div className='flex flex-col justify-center items-center gap-1 pb-3'>
             {letters.map((row, index) => (
