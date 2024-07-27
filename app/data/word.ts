@@ -1,1 +1,1 @@
-export const words = ['HELLO', 'MICROSOFT', 'CAMERA']
+export const words = ['HELLO', 'MICROSOFT', 'CAMERA', 'JOURNAL', 'COMPUTERS', 'CODING', 'SISTERS', 'ELDEST', 'LUNARHUB', 'READING', 'BOOKS']
