@@ -71,16 +71,9 @@ export default function Home() {
     setgameOver(false);
     setMisses(0);
     setGuessedArray([]);
+    setloseStatus(false);
   }
 
-  // function validateInput(e: React.ChangeEvent<HTMLInputElement>) {
-  //   const value = e.target.value;
-  //   const allowedCharacters = /^[a-zA-Z]*$/; // Regular expression to allow only letters
-
-  //   if (value === '' || allowedCharacters.test(value)) {
-  //     setinputValue(value);
-  //   }
-  // }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-24">
@@ -104,7 +97,13 @@ export default function Home() {
         }
       </div>
 
-      <QWERTY guess={inputValue} onGuessChange={checkGuess} />
+      <QWERTY
+        guess={inputValue}
+        onGuessChange={checkGuess}
+        guessedLetters={guessedArray}
+        maxMisses={maxMisses}
+        misses={misses}
+      />
       {/* <div id="guessed-container" className="border border-black p-4">
         <h3>Guessed Letters:</h3>
         <div className="flex flex-row gap-2">

@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 interface QWERTYProps {
     guess: string;
     onGuessChange: (guess: string) => void;
+    guessedLetters: string[];
+    maxMisses: number;
+    misses: number;
 }
-//TODO: Add a prop to disable the keyboard when misses are maxed out
+//TODO: Add a prop to disable the keyboard when misses are maxed out or pressed button
 //TODO: Add a prop so keys only appear red if their value is part of the gueessed letters
 
-const QWERTY: React.FC<QWERTYProps> = ({ guess, onGuessChange }) => {
+const QWERTY: React.FC<QWERTYProps> = ({ guess, guessedLetters, onGuessChange, maxMisses, misses }) => {
     const letters = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
     const [pressedLetters, setpressedLetters] = useState<string[]>([]);
     const handleClick = (letter: string) => {
@@ -23,12 +26,12 @@ const QWERTY: React.FC<QWERTYProps> = ({ guess, onGuessChange }) => {
 
                             key={lindex}
                             value={letter}
-                            disabled={pressedLetters.includes(letter)}
+                            disabled={misses > maxMisses}
                             onClick={(e) => {
                                 handleClick(letter);
                                 handleButtonPress(e);
                             }}
-                            className=' rounded-md bg-cyan-600 text-gray-100 text-xs p-3 disabled:bg-cyan-800'
+                            className={`rounded-md bg-cyan-600 text-gray-100 text-xs p-3 ${guessedLetters.includes(letter) ? 'bg-cyan-800' : 'bg-cyan-600'}`}
                         >
                             {letter}
                         </button>
