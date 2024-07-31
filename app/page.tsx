@@ -19,10 +19,23 @@ export default function Home() {
 
   const [chosenwordArray, setChosenwordArray] = useState<string[]>(new Array(chosenWord.length).fill(''));
 
-  useEffect(() => {
+  function init() {
     const word = words[Math.floor(Math.random() * words.length)];
     setChosenWord(word);
     setChosenwordArray(new Array(word.length).fill(''));
+    setwinStatus(false);
+    setgameOver(false);
+    setMisses(0);
+    setGuessedArray([]);
+    setloseStatus(false);
+    console.log("init");
+  }
+
+  useEffect(() => {
+    init();
+    // const word = words[Math.floor(Math.random() * words.length)];
+    // setChosenWord(word);
+    // setChosenwordArray(new Array(word.length).fill(''));
   }, []);
 
   //this is to make sure whenever the array has all the correct letters, win is shown immediately
@@ -36,20 +49,29 @@ export default function Home() {
 
   }, [chosenwordArray, chosenWord]);
 
+  useEffect(() => {
+    console.log("inputValue is " + inputValue);
+    // console.log("chosenWord " + chosenWord);
+    // console.log("chosenwordArray " + chosenwordArray);
+    // if (inputValue && chosenWord) {
+    //   checkGuess(inputValue);
+    // }
+  }, []);
+
 
   function getChosenWord() {
     return words[Math.floor(Math.random() * words.length)];
   }
   function checkGuess(inputValue: string) {
 
-    if (guessedArray.includes(inputValue)) {
-      alert("You have already guessed this letter");
-      setinputValue('');
-      return;
-    }
-    console.log("inputValue " + inputValue);
-    console.log("chosenWord " + chosenWord);
-    console.log("chosenwordArray " + chosenwordArray);
+    // if (guessedArray.includes(inputValue)) {
+    //   alert("You have already guessed this letter");
+    //   setinputValue('');
+    //   return;
+    // }
+    // console.log("inputValue " + inputValue);
+    // console.log("chosenWord " + chosenWord);
+    // console.log("chosenwordArray " + chosenwordArray);
 
 
     setGuessedArray([...guessedArray, inputValue]);
@@ -115,29 +137,19 @@ export default function Home() {
         maxMisses={maxMisses}
         misses={misses}
       />
-      {/* <div id="guessed-container" className="border border-black p-4">
-        <h3>Guessed Letters:</h3>
-        <div className="flex flex-row gap-2">
-          {guessedArray.map((letter, index) => (<p key={index}>{letter}</p>))}</div>
-      </div>
-      <input
-        value={inputValue}
-        onChange={(e) => { setinputValue(e.target.value.toUpperCase()) }} />
-      <button
-        onClick={() => { checkGuess(inputValue) }}
-        className="border border-black bg-white px-4 mt-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed disabled:text-gray-200"
-        disabled={gameOver}
-      >
-        Guess
-      </button> */}
+
 
       {gameOver &&
-        <button
-          className="border border-black bg-white px-4 mt-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed disabled:text-gray-200"
-          onClick={() => { resetGame() }}
-        >
-          Reset game
-        </button>}
+        <>
+          <button
+            className="border border-black bg-white px-4 mt-2 rounded-md disabled:bg-slate-400 disabled:cursor-not-allowed disabled:text-gray-200"
+            onClick={() => { init() }}
+          >
+            Reset game
+          </button>
+          {/* misses = {misses} */}
+        </>}
+
 
 
     </main>

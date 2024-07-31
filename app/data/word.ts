@@ -1,1 +1,16 @@
-export const words = ['HELLO', 'MICROSOFT', 'CAMERA', 'JOURNAL', 'COMPUTERS', 'CODING', 'SISTERS', 'ELDEST', 'LUNARHUB', 'READING', 'BOOKS']
+export const words = [
+  "HELLO",
+  "CAMERA",
+  "JOURNAL",
+  "CODER",
+  "SISTERS",
+  "ELDEST",
+  "LUNARHUB",
+  "READING",
+  "BOOKS",
+  "POETRY",
+  "CHESS",
+  "MATCHA",
+  "GLASS",
+  "MANGO",
+];
